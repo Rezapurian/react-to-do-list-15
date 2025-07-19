@@ -13,13 +13,17 @@ const TodoWrapper = () => {
     setTodos(savedTodos);
   }, []);
 
+  const saveLocalStorage = (newTodos) => {
+    localStorage.setItem("todos", JSON.stringify(newTodos));
+  };
+
   const addTodo = (todo) => {
     const newTodos = [
       ...todos,
       { id: uuidv4(), task: todo, completed: false, isEditing: false },
     ];
     setTodos(newTodos);
-    localStorage.setItem("todos", JSON.stringify(newTodos));
+    saveLocalStorage(newTodos);
   };
 
   const toggleComplete = (id) => {
@@ -27,13 +31,13 @@ const TodoWrapper = () => {
       todo.id === id ? { ...todo, completed: !todo.completed } : todo
     );
     setTodos(newTodos);
-    localStorage.setItem("todos", JSON.stringify(newTodos));
+    saveLocalStorage(newTodos);
   };
 
   const deleteTodo = (id) => {
     const newTodos = todos.filter((todo) => todo.id !== id);
     setTodos(newTodos);
-    localStorage.setItem("todos", JSON.stringify(newTodos));
+    saveLocalStorage(newTodos);
   };
 
   const editTodo = (id) => {
@@ -49,7 +53,7 @@ const TodoWrapper = () => {
       todo.id === id ? { ...todo, task, isEditing: !todo.isEditing } : todo
     );
     setTodos(newTodos);
-    localStorage.setItem("todos", JSON.stringify(newTodos));
+    saveLocalStorage(newTodos);
   };
   return (
     <div className="todo-wrapper">

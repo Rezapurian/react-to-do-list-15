@@ -13,7 +13,7 @@ const Todo = ({ task, toggleComplete, deleteTodo, editTodo }) => {
       <div>
         <FaPenToSquare
           className="icon edit-icon"
-          onClick={() => editTodo(task.id)}
+          onClick={() => !task.completed && editTodo(task.id)}
         />
         <FaTrash className="delete-icon" onClick={() => deleteTodo(task.id)} />
       </div>
